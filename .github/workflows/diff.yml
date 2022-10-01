@@ -1,8 +1,8 @@
 on: push
 name: CI
 jobs:
-  eslint:
-    name: ESLint
+  detect-diff:
+    name: detect-diff
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
