@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: add file
+        run: yarn create-file
       - uses: technote-space/get-diff-action@v6
         with:
           PATTERNS: |

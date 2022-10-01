@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "sunadoi <y.sunadoi@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "create-file": "touch src/main.js"
+  },
   "devDependencies": {
     "typescript": "^4.8.4"
   }
