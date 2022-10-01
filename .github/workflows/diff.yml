@@ -9,7 +9,7 @@ jobs:
       - name: add file
         run: yarn create-file
       - name: git-diff
-        run: git diff | echo -
+        run: git diff --name-only | cat
       - uses: technote-space/get-diff-action@v6
         with:
           PATTERNS: |
