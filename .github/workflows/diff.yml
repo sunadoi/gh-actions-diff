@@ -1,0 +1,19 @@
+on: pull_request
+name: CI
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: technote-space/get-diff-action@v6
+        with:
+          PATTERNS: |
+            +src/**/*.js
+      - name: Install Package dependencies
+        run: yarn install
+        if: env.GIT_DIFF
+      - name: Check code style
+        # Check only if there are differences in the source code
+        run: yarn lint
+        if: env.GIT_DIFF
