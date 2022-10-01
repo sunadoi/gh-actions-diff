@@ -20,6 +20,5 @@ jobs:
         run: yarn install
         if: env.GIT_DIFF
       - name: Check code style
-        # Check only if there are differences in the source code
         run: yarn lint
         if: env.GIT_DIFF
