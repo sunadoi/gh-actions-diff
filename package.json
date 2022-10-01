@@ -5,7 +5,7 @@
   "author": "sunadoi <y.sunadoi@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "create-file": "echo 'console.log(`a`)' >> src/main.js"
+    "create-file": "touch src/main.js"
   },
   "devDependencies": {
     "typescript": "^4.8.4"
