@@ -6,12 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: git init
-        run: git init
       - name: add file
         run: yarn create-file
-      - name: git-diff
-        run: git diff --name-only | cat
+      - name: git add -N
+        run: git add -N .
+      - name: git diff
+        run: git diff --exit-code
       - uses: technote-space/get-diff-action@v6
         with:
           PATTERNS: |
