@@ -8,6 +8,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: add file
         run: yarn create-file
+      - name: git-diff
+        run: git diff
       - uses: technote-space/get-diff-action@v6
         with:
           PATTERNS: |
