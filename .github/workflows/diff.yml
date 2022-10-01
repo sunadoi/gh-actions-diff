@@ -12,15 +12,3 @@ jobs:
         run: git add -N .
       - name: git diff
         run: git diff --exit-code
-      - uses: technote-space/get-diff-action@v6
-        with:
-          PATTERNS: |
-            src/**/*.js
-      - name: echo
-        run: echo '${{ env.GIT_DIFF }}'
-      - name: Install Package dependencies
-        run: yarn install
-        if: env.GIT_DIFF
-      - name: Check code style
-        run: yarn lint
-        if: env.GIT_DIFF
