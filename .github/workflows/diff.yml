@@ -12,6 +12,8 @@ jobs:
         with:
           PATTERNS: |
             +src/**/*.js
+      - name: echo
+        run: echo '${{ env.GIT_DIFF }}'
       - name: Install Package dependencies
         run: yarn install
         if: env.GIT_DIFF
