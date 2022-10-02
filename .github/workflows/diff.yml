@@ -1,13 +1,37 @@
 on: push
 name: CI
 jobs:
-  detect-diff:
+  check-create:
+    name: detect-diff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: create file
+        run: yarn create-file
+      - name: git add -N
+        run: git add -N .
+      - name: git diff
+        run: git diff --exit-code
+  check-update:
+    name: detect-diff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: update file
+        run: yarn update-file
+      - name: git add -N
+        run: git add -N .
+      - name: git diff
+        run: git diff --exit-code
+  check-remove:
     name: detect-diff
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: delete file
         run: yarn remove-file
+      - name: diff
+        run: git diff --exit-code
       - name: git add -N
         run: git add -N .
       - name: git diff
