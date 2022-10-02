@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: create file
-        run: yarn create-file
+      - name: delete file
+        run: yarn remove-file
       - name: git add -N
         run: git add -N .
       - name: git diff
