@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: add file
-        run: yarn create-file
+        run: yarn remove-file
       - name: git add -N
         run: git add -N .
       - name: git diff
