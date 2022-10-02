@@ -8,8 +8,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: create file
         run: yarn create-file
-      - name: git add -N
-        run: git add -N .
       - name: git diff
         run: git diff --diff-filter=ACDM --exit-code
   check-update:
@@ -19,8 +17,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: update file
         run: yarn update-file
-      - name: git add -N
-        run: git add -N .
       - name: git diff
         run: git diff --diff-filter=ACDM --exit-code
   check-remove:
@@ -32,7 +28,5 @@ jobs:
         run: yarn remove-file
       - name: diff
         run: git diff --exit-code
-      - name: git add -N
-        run: git add -N .
       - name: git diff
         run: git diff --diff-filter=ACDM --exit-code
