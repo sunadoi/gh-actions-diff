@@ -5,7 +5,8 @@
   "author": "sunadoi <y.sunadoi@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "create-file": "echo 'console.log(1)' > src/index.js",
+    "create-file": "touch src/sample.js",
+    "update-file": "echo 'console.log(1)' > src/index.js",
     "remove-file": "rm src/main.js"
   },
   "devDependencies": {
