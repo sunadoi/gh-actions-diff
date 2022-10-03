@@ -24,6 +24,7 @@ jobs:
       - name: Status
         if: ${{ steps.diff.outcome == 'failure' }}
         run: exit 1
+
   check-update:
     name: detect-diff
     runs-on: ubuntu-latest
@@ -35,6 +36,7 @@ jobs:
         run: git add .
       - name: git diff
         run: git diff --cached --exit-code
+
   check-remove:
     name: detect-diff
     runs-on: ubuntu-latest
