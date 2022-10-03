@@ -1,4 +1,4 @@
-export const checkDiff = ({ github, context }) => {
+module.export = ({ github, context }) => {
   github.rest.issues.createComment({
     issue_number: context.issue.number,
     owner: context.repo.owner,
