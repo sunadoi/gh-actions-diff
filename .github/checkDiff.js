@@ -1,6 +1,6 @@
 const commentPR = `
 Uncommitted changes were detected after runnning <code>generate</code> command.
-Please run <code>pnpm run generate:locales</code> or <code>pnpm run generate:api-docs</code> to generate/update the related files, and commit them.";
+Please run <code>pnpm run generate:locales</code> or <code>pnpm run generate:api-docs</code> to generate/update the related files, and commit them.
 `;
 
 module.exports = async ({ github, context, isSuccess }) => {
