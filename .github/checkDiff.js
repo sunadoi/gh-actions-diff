@@ -25,13 +25,6 @@ module.exports = async ({ github, context, isSuccess }) => {
   }
 
   if (botComment) {
-    await github.rest.issues.updateComment({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      comment_id: botComment.id,
-      body,
-    });
-  } else {
     await github.rest.issues.createComment({
       issue_number: context.issue.number,
       owner: context.repo.owner,
