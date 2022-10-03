@@ -4,7 +4,6 @@ Please run <code>pnpm run generate:locales</code> or <code>pnpm run generate:api
 `;
 
 module.exports = async ({ github, context, isSuccess }) => {
-  console.log({ isSuccess });
   const { data: comments } = await github.rest.issues.listComments({
     owner: context.repo.owner,
     repo: context.repo.repo,
@@ -12,8 +11,10 @@ module.exports = async ({ github, context, isSuccess }) => {
   });
 
   const botComment = comments.find((comment) => {
+    console.log({ body: comment.body });
     return comment.user.type === "Bot" && comment.body.includes(commentPR);
   });
+  console.log({ botComment });
 
   if (botComment) {
     github.rest.issues.deleteComment({
