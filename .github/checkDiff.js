@@ -5,10 +5,7 @@ module.exports = async ({ github, context, isSuccess }) => {
     issue_number: context.issue.number,
   });
 
-  const body = `
-  Uncommitted changes were detected after runnning <code>generate</code> command.
-  Please run <code>pnpm run generate:locales</code> or <code>pnpm run generate:api-docs</code> to generate/update the related files, and commit them.
-  `;
+  const body = `Uncommitted changes were detected after runnning <code>generate</code> command.\nPlease run <code>pnpm run generate:locales</code> or <code>pnpm run generate:api-docs</code> to generate/update the related files, and commit them.`;
 
   const botComment = comments.find(
     (comment) => comment.user.type === "Bot" && comment.body.includes(body)
