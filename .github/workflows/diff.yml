@@ -14,8 +14,6 @@ jobs:
         id: diff
         run: git diff --cached --exit-code
         continue-on-error: true
-      - name: echo
-        run: echo '${{ steps.diff.outcome }}'
       - uses: actions/github-script@v6
         with:
           script: |
