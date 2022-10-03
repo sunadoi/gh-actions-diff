@@ -5,8 +5,11 @@ module.exports = async ({ github, context, isSuccess }) => {
     repo: context.repo.repo,
     issue_number: context.issue.number,
   });
+  const comment =
+    "Please run pnpm run `generate:locales` or `generate:api-docs` to generate/update the related files.";
+
   const botComment = comments.find((comment) => {
-    return comment.user.type === "Bot" && comment.body.includes("body");
+    return comment.user.type === "Bot" && comment.body.includes(comment);
   });
 
   if (botComment) {
