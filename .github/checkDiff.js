@@ -22,6 +22,7 @@ module.exports = async ({ github, context, isSuccess }) => {
       repo: context.repo.repo,
       comment_id: botComment.id,
     });
+    return;
   }
 
   github.rest.issues.createComment({
