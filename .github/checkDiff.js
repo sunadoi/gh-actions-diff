@@ -21,12 +21,12 @@ module.exports = async ({ github, context, isSuccess }) => {
     return;
   }
 
-  if (!botComment) {
-    await github.rest.issues.createComment({
-      issue_number: context.issue.number,
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      body,
-    });
-  }
+  // if (!botComment) {
+  await github.rest.issues.createComment({
+    issue_number: context.issue.number,
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    body,
+  });
+  // }
 };
