@@ -1,4 +1,4 @@
-on: push
+on: pull_request
 name: CI
 jobs:
   check-create:
@@ -11,7 +11,19 @@ jobs:
       - name: git add
         run: git add .
       - name: git diff
+        id: diff
         run: git diff --cached --exit-code
+        continue-on-error: true
+      - uses: actions/github-script@v6
+        if: ${{ steps.diff.outcome == 'failure' }}
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "comment body"
+            })
   check-update:
     name: detect-diff
     runs-on: ubuntu-latest
