@@ -6,7 +6,7 @@ module.exports = async ({ github, context, isSuccess }) => {
     issue_number: context.issue.number,
   });
   const commentPR =
-    "Please run pnpm run `generate:locales` or `generate:api-docs` to generate/update the related files.";
+    "Uncommitted changes were detected after runnning generate command.\nPlease run `pnpm run generate:locales` or `pnpm run generate:api-docs` to generate/update the related files.";
 
   const botComment = comments.find((comment) => {
     return comment.user.type === "Bot" && comment.body.includes(commentPR);
