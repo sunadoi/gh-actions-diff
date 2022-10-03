@@ -1,3 +1,8 @@
+const commentPR = `
+Uncommitted changes were detected after runnning <code>generate</code> command.
+Please run <code>pnpm run generate:locales</code> or <code>pnpm run generate:api-docs</code> to generate/update the related files, and commit them.";
+`;
+
 module.exports = async ({ github, context, isSuccess }) => {
   console.log({ isSuccess });
   const { data: comments } = await github.rest.issues.listComments({
@@ -5,8 +10,6 @@ module.exports = async ({ github, context, isSuccess }) => {
     repo: context.repo.repo,
     issue_number: context.issue.number,
   });
-  const commentPR =
-    "Uncommitted changes were detected after runnning `generate` command.\nPlease run `pnpm run generate:locales` or `pnpm run generate:api-docs` to generate/update the related files, and commit them.";
 
   const botComment = comments.find((comment) => {
     return comment.user.type === "Bot" && comment.body.includes(commentPR);
