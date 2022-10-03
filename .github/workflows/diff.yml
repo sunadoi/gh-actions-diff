@@ -18,12 +18,11 @@ jobs:
         if: ${{ steps.diff.outcome == 'failure' }}
         with:
           script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: "comment body"
-            })
+            const script = require('../checkDiff.js')
+            script({ github, context })
+      - name: Status
+        if: ${{ steps.diff.outcome == 'failure' }}
+        run: exit 1
   check-update:
     name: detect-diff
     runs-on: ubuntu-latest
