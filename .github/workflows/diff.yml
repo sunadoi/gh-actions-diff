@@ -18,7 +18,7 @@ jobs:
         with:
           script: |
             const script = require('${{ github.workspace }}/.github/checkDiff.js')
-            script({ github, context, isSuccess: ${{ steps.diff.outcome == 'success' }} })
+            await script({ github, context, isSuccess: ${{ steps.diff.outcome == 'success' }} })
       - name: Status
         if: ${{ steps.diff.outcome == 'failure' }}
         run: exit 1
