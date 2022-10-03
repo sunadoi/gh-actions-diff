@@ -1,4 +1,4 @@
-const commentPR = `
+const body = `
 Uncommitted changes were detected after runnning <code>generate</code> command.
 Please run <code>pnpm run generate:locales</code> or <code>pnpm run generate:api-docs</code> to generate/update the related files, and commit them.
 `;
@@ -10,14 +10,13 @@ module.exports = async ({ github, context, isSuccess }) => {
     issue_number: context.issue.number,
   });
 
-  const botComment = comments.find((comment) => {
-    console.log({ body: comment.body });
-    return comment.user.type === "Bot" && comment.body.includes(commentPR);
-  });
-  console.log({ botComment });
+  const botComment = comments.find(
+    (comment) => comment.user.type === "Bot" && comment.body.includes(body)
+  );
 
-  if (botComment) {
-    github.rest.issues.deleteComment({
+  if (isSuccess) {
+    if (!botComment) return;
+    await github.rest.issues.deleteComment({
       owner: context.repo.owner,
       repo: context.repo.repo,
       comment_id: botComment.id,
@@ -25,10 +24,19 @@ module.exports = async ({ github, context, isSuccess }) => {
     return;
   }
 
-  github.rest.issues.createComment({
-    issue_number: context.issue.number,
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    body: commentPR,
-  });
+  if (botComment) {
+    await github.rest.issues.updateComment({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      comment_id: botComment.id,
+      body,
+    });
+  } else {
+    await github.rest.issues.createComment({
+      issue_number: context.issue.number,
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      body,
+    });
+  }
 };
