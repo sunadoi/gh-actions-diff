@@ -5,4 +5,5 @@ module.export = ({ github, context }) => {
     repo: context.repo.repo,
     body: "comment body",
   });
+  return;
 };
