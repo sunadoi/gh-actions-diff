@@ -14,12 +14,14 @@ jobs:
         id: diff
         run: git diff --cached --exit-code
         continue-on-error: true
+      - name: echo
+        run: echo '${{ steps.diff.outcome }}'
       - uses: actions/github-script@v6
         if: ${{ steps.diff.outcome == 'failure' }}
         with:
           script: |
             const script = require('${{ github.workspace }}/.github/checkDiff.js')
-            script({ github, context })
+            script({ github, context, isSuccess: '${{ steps.diff.outcome == 'failure' }}' == 'failure' })
       - name: Status
         if: ${{ steps.diff.outcome == 'failure' }}
         run: exit 1

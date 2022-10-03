@@ -1,4 +1,5 @@
-module.exports = async ({ github, context }) => {
+module.exports = async ({ github, context, isSuccess }) => {
+  console.log({ isSuccess });
   const { data: comments } = await github.rest.issues.listComments({
     owner: context.repo.owner,
     repo: context.repo.repo,
