@@ -5,6 +5,8 @@ permissions:
 jobs:
   check-create:
     name: detect-diff
+    permissions:
+      actions: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,8 +19,6 @@ jobs:
         run: git diff --cached --exit-code
         continue-on-error: true
       - uses: actions/github-script@v6
-        permissions:
-          actions: write
         with:
           script: |
             const script = require('${{ github.workspace }}/.github/checkDiff.js')
