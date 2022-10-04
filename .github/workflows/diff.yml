@@ -1,5 +1,7 @@
 on: pull_request
 name: CI
+permissions:
+  contents: read
 jobs:
   check-create:
     name: detect-diff
