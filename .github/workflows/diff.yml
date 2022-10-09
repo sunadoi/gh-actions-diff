@@ -18,11 +18,13 @@ jobs:
         id: diff
         run: git diff --cached --exit-code
         continue-on-error: true
+      - name: tsc
+        run: yarn tsc .github/workflows/checkDiff.ts --outDir .github/workflows --lib es2019
       - uses: actions/github-script@v6
         with:
           script: |
             const script = require('${{ github.workspace }}/.github/workflows/checkDiff.js')
-            await script({ github, context, isSuccess: ${{ steps.diff.outcome == 'success' }} })
+            await script(github, context, ${{ steps.diff.outcome == 'success' }})
       - name: Status
         if: ${{ steps.diff.outcome == 'failure' }}
         run: exit 1
