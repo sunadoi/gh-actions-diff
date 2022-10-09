@@ -9,7 +9,7 @@
 
 import { GitHub, context as ctx } from "@actions/github/lib/utils";
 
-export default async (
+module.exports = async (
   github: InstanceType<typeof GitHub>,
   context: typeof ctx,
   isSuccess: boolean
