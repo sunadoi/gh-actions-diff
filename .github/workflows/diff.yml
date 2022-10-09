@@ -1,8 +1,12 @@
-on: push
+on: pull_request
 name: CI
+permissions:
+  contents: read
 jobs:
   check-create:
     name: detect-diff
+    permissions:
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -11,7 +15,22 @@ jobs:
       - name: git add
         run: git add .
       - name: git diff
+        id: diff
         run: git diff --cached --exit-code
+        continue-on-error: true
+      - name: yarn install
+        run: yarn install
+      # - name: tsc
+      #   run: yarn tsc .github/workflows/checkDiff.ts --outDir .github/workflows --lib es2019
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const script = require('${{ github.workspace }}/.github/workflows/checkDiff.ts')
+            await script(github, context, ${{ steps.diff.outcome == 'success' }})
+      - name: Status
+        if: ${{ steps.diff.outcome == 'failure' }}
+        run: exit 1
+
   check-update:
     name: detect-diff
     runs-on: ubuntu-latest
@@ -23,6 +42,7 @@ jobs:
         run: git add .
       - name: git diff
         run: git diff --cached --exit-code
+
   check-remove:
     name: detect-diff
     runs-on: ubuntu-latest
