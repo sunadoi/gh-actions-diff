@@ -20,12 +20,12 @@ jobs:
         continue-on-error: true
       - name: yarn install
         run: yarn install
-      - name: tsc
-        run: yarn tsc .github/workflows/checkDiff.ts --outDir .github/workflows --lib es2019
+      # - name: tsc
+      #   run: yarn tsc .github/workflows/checkDiff.ts --outDir .github/workflows --lib es2019
       - uses: actions/github-script@v6
         with:
           script: |
-            const script = require('${{ github.workspace }}/.github/workflows/checkDiff.js')
+            const script = require('${{ github.workspace }}/.github/workflows/checkDiff.ts')
             await script(github, context, ${{ steps.diff.outcome == 'success' }})
       - name: Status
         if: ${{ steps.diff.outcome == 'failure' }}
