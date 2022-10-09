@@ -18,6 +18,8 @@ jobs:
         id: diff
         run: git diff --cached --exit-code
         continue-on-error: true
+      - name: yarn install
+        run: yarn install
       - name: tsc
         run: yarn tsc .github/workflows/checkDiff.ts --outDir .github/workflows --lib es2019
       - uses: actions/github-script@v6
