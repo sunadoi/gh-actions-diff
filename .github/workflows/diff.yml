@@ -10,8 +10,12 @@ jobs:
         run: yarn create-file
       - name: git add
         run: git add .
-      - name: git commit
-        run: git commit -m "create file"
+      - name: Get list of changed files
+        run: |
+          git fetch origin ${{ github.event.before }} # Fetch the base commit
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changed_files.txt
+      - name: echo changed_files
+        run: cat changed_files.txt
       - name: git diff
         run: git diff --cached --exit-code
   check-update:
