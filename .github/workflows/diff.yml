@@ -12,7 +12,8 @@ jobs:
         run: git add .
       - name: Get list of changed files
         run: |
-          git diff --name-only origin/main ${{ github.sha }} > changed_files.txt
+          git fetch origin main:main
+          git diff --name-only main ${{ github.sha }} > changed_files.txt
       - name: echo changed_files
         run: cat changed_files.txt
       - name: git diff
