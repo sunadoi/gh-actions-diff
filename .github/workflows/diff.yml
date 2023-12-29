@@ -10,7 +10,7 @@ jobs:
         run: yarn create-file
       - name: git add
         run: git add .
-      - name: git diff
+      - name: git dif
         run: git diff --cached --exit-code
   check-update:
     name: detect-diff
